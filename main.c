@@ -4,45 +4,95 @@
 #include <time.h>
 #include <math.h>
 
-extern void asmhello();
+extern void asm_kernel(float* x1, float* x2, float* y1, float* y2, float* z, int n);
+
+void c_kernel(float* x1, float* x2, float* y1, float* y2, float* z, int n) {
+    for (int i = 0; i < n; i++) {
+        float dx = x2[i] - x1[i];
+        float dy = y2[i] - y1[i];
+        z[i] = sqrtf(dx * dx + dy * dy);
+    }
+}
+
 int main(int argc, char* argv[]) {
-	clock_t begin = clock();
 
-	int vectorSize;
-	
-	scanf_s("%d", &vectorSize);
-	vectorSize = vectorSize * 4
+    int vectorSize;
 
-	printf("%d\n", vectorSize);
-	("\n");
+    printf("Enter the vector size (number of elements per vector): ");
+    scanf_s("%d", &vectorSize);
+    vectorSize = vectorSize * 4; 
 
-	float *xOne = malloc(vectorSize * sizeof(float));
-	float *yOne = malloc(vectorSize * sizeof(float));
-	float *xTwo = malloc(vectorSize * sizeof(float));
-	float *yTwo = malloc(vectorSize * sizeof(float));
-	float *z = malloc(vectorSize * sizeof(float));
-	for (int i = 0; i < vectorSize; i++) {
-		scanf_s("%f", &xOne[i]);
-		scanf_s("%f", &xTwo[i]);
-		scanf_s("%f", &yOne[i]);
-		scanf_s("%f", &yTwo[i]);
+    printf("Total vector size = %d\n", vectorSize);
 
-		z[i] = sqrt(pow(xTwo[i] - xOne[i], 2) + pow(yTwo[i] - yOne[i], 2));
-	}
-	
-	printf("The first 10 elements of Z are: ");
-	for (int i = 0; i < 10; i++) {
-		printf("%.2f, ", z[i]);
-	}
+    float* xOne = malloc(vectorSize * sizeof(float));
+    float* yOne = malloc(vectorSize * sizeof(float));
+    float* xTwo = malloc(vectorSize * sizeof(float));
+    float* yTwo = malloc(vectorSize * sizeof(float));
+    float* zC = malloc(vectorSize * sizeof(float));
+    float* zASM = malloc(vectorSize * sizeof(float));
 
-	// asmhello();
+ 
+    printf("\nenter the vector elements.\n");
+    for (int i = 0; i < vectorSize; i++) {
+        printf("\nElement %d:\n", i + 1);
+
+        printf("X1[%d] = ", i + 1);
+        scanf_s("%f", &xOne[i]);
+
+        printf("X2[%d] = ", i + 1);
+        scanf_s("%f", &xTwo[i]);
+
+        printf("Y1[%d] = ", i + 1);
+        scanf_s("%f", &yOne[i]);
+
+        printf("Y2[%d] = ", i + 1);
+        scanf_s("%f", &yTwo[i]);
+    }
 
 
-	printf("\ndone");
-	clock_t end = clock();
+    clock_t beginC = clock();
 
-	float time_spent = (float)(end - begin);
-	printf("\n%f", time_spent/CLOCKS_PER_SEC);
-	
-	return 0;
+    c_kernel(xOne, xTwo, yOne, yTwo, zC, vectorSize);
+
+    clock_t endC = clock();
+    float timeC = (float)(endC - beginC) / CLOCKS_PER_SEC;
+
+
+    printf("\nC Kernel Z[0..9]: ");
+    for (int i = 0; i < 10 && i < vectorSize; i++) printf("%.2f, ", zC[i]);
+    printf("\nC Time: %f seconds\n", timeC);
+
+    clock_t beginASM = clock();
+
+    asm_kernel(xOne, xTwo, yOne, yTwo, zASM, vectorSize);
+
+    clock_t endASM = clock();
+    float timeASM = (float)(endASM - beginASM) / CLOCKS_PER_SEC;
+
+    printf("\nASM Kernel Z[0..9]: ");
+    for (int i = 0; i < 10 && i < vectorSize; i++) printf("%.2f, ", zASM[i]);
+    printf("\nASM Time: %f seconds\n", timeASM);
+
+    int correct = 1;
+    for (int i = 0; i < vectorSize; i++) {
+        if (fabs(zC[i] - zASM[i]) > 0.0001f) {
+            correct = 0;
+            break;
+        }
+    }
+
+    if (correct)
+        printf("\nASM kernel output is CORRECT.\n");
+    else
+        printf("\nASM kernel output is WRONG.\n");
+
+
+    free(xOne);
+    free(xTwo);
+    free(yOne);
+    free(yTwo);
+    free(zC);
+    free(zASM);
+
+    return 0;
 }
