@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
     printf("Enter the vector size (number of elements per vector): ");
     scanf_s("%d", &vectorSize);
-    vectorSize = vectorSize * 4; 
+    vectorSize = vectorSize * 4;
 
     printf("Total vector size = %d\n", vectorSize);
 
@@ -31,21 +31,21 @@ int main(int argc, char* argv[]) {
     float* zC = malloc(vectorSize * sizeof(float));
     float* zASM = malloc(vectorSize * sizeof(float));
 
- 
-    printf("\nenter the vector elements.\n");
-    for (int i = 0; i < vectorSize; i++) {
-        printf("\nElement %d:\n", i + 1);
 
-        printf("X1[%d] = ", i + 1);
+    printf("\nEnter the vector elements.\n");
+    for (int i = 0; i < vectorSize; i++) {
+        printf("\nElement %d:\n", i);
+
+        printf("X1[%d] = ", i);
         scanf_s("%f", &xOne[i]);
 
-        printf("X2[%d] = ", i + 1);
+        printf("X2[%d] = ", i);
         scanf_s("%f", &xTwo[i]);
 
-        printf("Y1[%d] = ", i + 1);
+        printf("Y1[%d] = ", i);
         scanf_s("%f", &yOne[i]);
 
-        printf("Y2[%d] = ", i + 1);
+        printf("Y2[%d] = ", i);
         scanf_s("%f", &yTwo[i]);
     }
 
