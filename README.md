@@ -1,5 +1,7 @@
 # LBYARCH S18B MP2
-## Ambata, Simon Luis & Aragon, Enrique Miguel 
+### Ambata, Simon Luis & Aragon, Enrique Miguel 
+
+### The Google Drive link for our demo can be found here: https://drive.google.com/file/d/16PHJ17InSqdPYnsx3Y5ykdugpaULRVzF/view?usp=sharing
 MP Specs:
 ![MP Specs](https://github.com/ena0553/LBYARCH-MP2/blob/main/Images/MP-specs.png?raw=true)
 When performing the stress tests on both kernels, we executed each kernel 30 times in order to get the average execution time.
