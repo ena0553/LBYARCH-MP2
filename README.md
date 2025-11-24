@@ -11,3 +11,5 @@ When performing the stress tests on both kernels, we executed each kernel 30 tim
 ![Sample Screenshot](https://github.com/ena0553/LBYARCH-MP2/blob/main/Images/sample-result.png?raw=true)
 
 It is immediately evident that the Assembly kernel is significantly faster than the C kernel. Across all three stress tests, the average time for Assembly was consistently about 2.5x faster than the average time for C. This highlights the advantage of using a low-level language such as Assembly for handling multiple computations on a large scale, as compared to a language like C which is higher level in compariosn.
+
+Video Demo Link:<link>
