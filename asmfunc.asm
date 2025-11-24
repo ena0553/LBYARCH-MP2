@@ -7,14 +7,15 @@ global asm_kernel
 ; RDX = x2
 ; R8  = y1
 ; R9  = y2
-; [rsp+40] = z
-; [rsp+48] = n
+; [rsp+48] = z
+; [rsp+56] = n
 
 asm_kernel:
+    push rbp
     mov rbp, rsp
 
-    mov r10, [rbp + 40] ; z
-    mov r11d, [rbp + 48] ; n
+    mov r10, [rbp + 48] ; z
+    mov r11d, [rbp + 56] ; n
 
     xor rax, rax
 
@@ -43,5 +44,6 @@ asm_kernel:
     jmp .loop
 
 .done:
+    pop rbp
     xor rax, rax
     ret
