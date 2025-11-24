@@ -1,4 +1,5 @@
-# LBYARCH-MP2
+# LBYARCH S18B MP2
+## Ambata, Simon Luis & Aragon, Enrique Miguel 
 MP Specs:
 ![MP Specs](https://github.com/ena0553/LBYARCH-MP2/blob/main/Images/MP-specs.png?raw=true)
 When performing the stress tests on both kernels, we executed each kernel 30 times in order to get the average execution time.
