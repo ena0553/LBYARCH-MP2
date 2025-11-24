@@ -1,5 +1,6 @@
 # LBYARCH-MP2
-
+MP Specs:
+![MP Specs](https://github.com/ena0553/LBYARCH-MP2/blob/main/MP-specs.png?raw=true)
 When performing the stress tests on both kernels, we executed each kernel 30 times in order to get the average execution time.
 
 ## Sample runs using vector sizes of 2e20, 2e24, and 2e28 are shown below:
