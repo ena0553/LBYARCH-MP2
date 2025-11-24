@@ -1,2 +1,0 @@
-^C:\MCO2\ASMFUNC.ASM
-nasm.exe asmfunc.asm -f win64 -o asmfunc.obj
